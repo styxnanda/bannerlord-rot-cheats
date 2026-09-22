@@ -92,6 +92,11 @@ namespace RoTCheats.MissionBehaviors
                         bool isSquad = agent.Team != null && agent.Team.IsPlayerTeam && !agent.IsMainAgent;
                         bool isSquadMount = agent.IsMount && agent.RiderAgent != null && agent.RiderAgent.Team != null && agent.RiderAgent.Team.IsPlayerTeam;
 
+                        if (settings.PartyGodMode && (isSquad || isSquadMount))
+                        {
+                            agent.Health = agent.HealthLimit;
+                        }
+
                         if (isPlayer && pSpeed > 1.0f)
                         {
                             agent.SetMaximumSpeedLimit(pSpeed, true);
