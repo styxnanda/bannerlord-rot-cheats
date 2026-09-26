@@ -21,15 +21,29 @@ Press either hotkey anywhere in-game (on the campaign map, inside settlements, o
 - **`F10`**
 - **`Ctrl + Shift + C`**
 
-### 3. ⛺ Settlement / Town / Camp Menu
-When entering any town, castle, village, or opening the campaign camp menu, click the dedicated menu option:
-- **`Realm of Thrones Cheats`**
+### 3. ⚔️ Battle Skills Hotkeys (Including Sieges)
+Cast devastating mythical abilities at any time in combat on foot, horseback, or riding dragons:
+- **`Numpad 1`** or **`U`** &rarr; **💨 Sweeping Force** (Fus-Ro-Dah frontal blast & throw)
+- **`Numpad 2`** or **`I`** &rarr; **🔥 R'hllor's Light** (Aimed circular firestorm barrage)
+- **`Numpad 3`** or **`O`** &rarr; **🐉 Cannibal's Wisp** (Aimed dragon fire stream spray)
+- **`Numpad 4`** or **`P`** &rarr; **💀 Deathly Hallows** (Last resort: wipe all enemies to win)
+- **`K`** &rarr; **⚡ Battle Skills Quick-Cast Menu** (In-game skill selection popup)
 
-### 4. 💻 Developer Console Commands (`Alt + ~`)
+### 4. ⛺ Campaign & Imprisonment Menus
+- **Settlement & Camp Menus**: When in any town, castle, village, or opening camp, click **`Realm of Thrones Cheats`**.
+- **🏰 Imprisonment Escape Menu**: When captured by an enemy party or locked in a dungeon cell, click the dedicated option **`✨ Escape mysteriously (RoT Cheats)`** to slip into the shadows and vanish without harm!
+
+### 5. 💻 Developer Console Commands (`Alt + ~`)
 Open the Bannerlord developer console by pressing `Alt + ~` and use the following commands:
 | Command | Description |
 |---|---|
 | `rotcheats.menu` | Opens the full interactive cheat inquiry menu |
+| `rotcheats.sweeping_force` | Unleashes Sweeping Force (Fus-Ro-Dah blast) |
+| `rotcheats.rhllor_light` | Unleashes R'hllor's Light (Aimed firestorm barrage) |
+| `rotcheats.cannibal_wisp` | Unleashes Cannibal's Wisp (Aimed dragon fire spray) |
+| `rotcheats.deathly_hallows` | Unleashes Deathly Hallows (Wipes all enemies to win) |
+| `rotcheats.skills` | Opens the Battle Skills Quick-Cast menu |
+| `rotcheats.escape` | Mysteriously escapes from captivity immediately |
 | `rotcheats.godmode` | Toggles God Mode (Invulnerability + Auto-Heal) |
 | `rotcheats.onehit` | Toggles One-Hit Kill (Shield & Guard Piercing) |
 | `rotcheats.weight` | Toggles Unlimited Inventory Weight (10,000,000 capacity) |
@@ -43,7 +57,37 @@ Open the Bannerlord developer console by pressing `Alt + ~` and use the followin
 
 ## ✨ Features Overview
 
-### 🐉 1. Realm of Thrones Dragons
+### ⚡ 1. Mythical Battle Skills (Active in Field Battles & Sieges)
+- **💨 1. Sweeping Force (Fus-Ro-Dah)**:
+  - Medium-range frontal blast that unleashes a kinetic shockwave of dust and crushed stone.
+  - Enemies in front of you (~28m, ~75° cone) are violently knocked off their feet, dismounted, and launched flying backward through the air as corpses with physics ragdoll impulse.
+  - In sieges, this blasts enemies straight off ramparts, ladders, and battlements!
+  - **Hotkeys**: `Numpad 1` or `U`
+- **🔥 2. R'hllor's Light (Rasenshuriken Firestorm Barrage)**:
+  - Aimed directly through your crosshair or camera view at any ground point, castle wall, battlement, or gatehouse (raycast up to 250m).
+  - Triggers a massive swirling firestorm barrage across a large circular area (~22m radius), summoning roaring fire pillars and spinning explosion trails.
+  - Incinerates all enemies and enemy mounts inside the circular zone into ashes.
+  - **Hotkeys**: `Numpad 2` or `I`
+- **🐉 3. Cannibal's Wisp (Dragon Flame Spray)**:
+  - Channels the fiery wrath of Cannibal, the wild dragon of Dragonstone.
+  - Emits a continuous, concentrated stream of roaring dragon flames in the aimed direction (up to ~36m forward).
+  - Scorches everything in its cone, igniting victims into raging infernos. Perfect for incinerating choke points, breaches, and ladder bottlenecks.
+  - **Hotkeys**: `Numpad 3` or `O`
+- **💀 4. Deathly Hallows (Wipe All Enemies)**:
+  - The ultimate last resort power when you are tired or bored of the battle and want an immediate victory.
+  - Releases a battlefield-wide pulse of doom that instantly eliminates all active enemy soldiers across the entire map, including siege crews, wall defenders, and reinforcements.
+  - **Hotkeys**: `Numpad 4` or `P`
+- **⚡ 5. Quick-Cast Skill Selector**:
+  - Press `K` during any battle or siege to bring up the slow-motion skill inquiry popup to trigger any ability on demand.
+
+### 🏰 2. Mysterious Imprisonment Escape (Shadow Magic)
+- **Captivity Game Menu**: If your character is captured after a lost battle or locked in a dungeon, a dedicated menu option appears:
+  - **`✨ Escape mysteriously (RoT Cheats)`**
+  - Seamlessly available in mobile party captivity (`prisoner_wait`), town dungeons, and castle cells (`settlement_wait`, `menu_captivity_castle_remain`).
+  - Allows you to slip past iron bars and guards like a Faceless Man or Shadowbinder, instantly ending captivity and returning you safely to the realm.
+- **Cheat Menu & Console**: Also triggerable at any time via F10 Cheat Menu or `rotcheats.escape`.
+
+### 🐉 3. Realm of Thrones Dragons
 - **Instant Spawn & Auto-Equip**: Spawns your chosen dragon directly into your party inventory and immediately equips it into your active mount slot:
   - **Drogon** (Ground & Flying variants)
   - **Rhaegal** (Ground & Flying variants)
@@ -54,13 +98,12 @@ Open the Bannerlord developer console by pressing `Alt + ~` and use the followin
 - **Armored Dragon Saddle**: Spawns and equips the heavy armored saddle designed for dragons.
 - **⭐ Spawn All Dragons Bundle**: Instantly adds 1 of every ground and flying dragon plus 5 armored saddles with a single click.
 
-### 🛡️ 2. Combat & Invulnerability
+### 🛡️ 4. Combat & Invulnerability
 - **Hero & Dragon God Mode**: Intercepts all incoming damage via Harmony prefix and mission tick enforcement, keeping you and your mount at 100% health.
 - **Party God Mode**: Protects all allied troops and companions in your squad from taking battle damage.
 - **One-Hit Kill (Shield & Guard Piercing)**: Any hit you or your soldiers land on an enemy deals 99,999 lethal damage, completely bypassing shields, parries, and blocks. *Enemies never receive this bonus.*
 - **Unlimited Ammo**: Continuously tops off all arrow quivers, crossbow bolts, and throwing weapons in real-time during battles.
 - **Instant Full Heal**: Restores you, your dragon, and your entire army to full health immediately.
-- **Defeat All Enemies**: Instantly routes/eliminates all active enemy combatants in the current mission.
 
 ### 🏃 3. Movement & Mount Speed Multipliers
 - **Player Speed Multiplier**: Configurable on-foot movement speed (1.0x to 5.0x).

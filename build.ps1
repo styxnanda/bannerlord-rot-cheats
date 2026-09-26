@@ -42,6 +42,7 @@ $references = @(
     "/r:`"$harmonyDll`"",
     "/r:`"$mcmDll`"",
     "/r:`"$rotDll`"",
+    "/r:`"$binDir\System.Numerics.Vectors.dll`"",
     "/r:System.dll",
     "/r:System.Core.dll"
 )

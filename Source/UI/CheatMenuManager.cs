@@ -16,7 +16,14 @@ namespace RoTCheats.UI
             CheatSettings settings = CheatSettings.Instance;
 
             List<InquiryElement> elements = new List<InquiryElement>();
+
+            if (ImprisonmentCheats.IsPlayerImprisoned())
+            {
+                elements.Add(new InquiryElement("escape_captivity", "✨ Escape Imprisonment Mysteriously", null, true, "Break out of captivity now using shadow magic and vanish unseen into freedom."));
+            }
+
             elements.Add(new InquiryElement("dragons", "🐉 Realm of Thrones Dragons", null, true, "Spawn Drogon, Rhaegal, Viserion, Draeghar (Ground or Flying) & Armored Dragon Saddle."));
+            elements.Add(new InquiryElement("battle_skills", "⚡ Battle Skills & Magic", null, true, "Sweeping Force (Fus-Ro-Dah), R'hllor's Light (Firestorm), Cannibal's Wisp (Dragon Fire), & Deathly Hallows."));
             elements.Add(new InquiryElement("combat", "🛡️ God Mode & Combat Cheats", null, true, string.Format("God Mode: {0} | Party God: {1} | Ammo: {2} | One-Hit: {3}",
                 settings.GodMode ? "ON" : "OFF",
                 settings.PartyGodMode ? "ON" : "OFF",
@@ -28,7 +35,7 @@ namespace RoTCheats.UI
                 settings.UnlimitedWeight ? "ON" : "OFF")));
             elements.Add(new InquiryElement("stamina", "⚒️ Unlimited Stamina & Crafting", null, true, string.Format("Infinite Smithing Stamina: {0} | Unlock all crafting pieces.", settings.InfiniteStamina ? "ON" : "OFF")));
             elements.Add(new InquiryElement("skills", "⭐ Modify Skills, Levels & XP", null, true, "Set skills to 300+, add focus/attribute points, and level up Main Hero or Companions."));
-            elements.Add(new InquiryElement("party", "👑 Party & Kingdom Cheats", null, true, "Max party morale, instant troop upgrades, renown, and influence."));
+            elements.Add(new InquiryElement("party", "👑 Party & Kingdom Cheats", null, true, "Max party morale, instant troop upgrades, renown, influence, and mysterious escape."));
 
             MultiSelectionInquiryData data = new MultiSelectionInquiryData(
                 "Realm of Thrones Cheats (v7.1)",
@@ -45,8 +52,14 @@ namespace RoTCheats.UI
                     string id = selected[0].Identifier as string;
                     switch (id)
                     {
+                        case "escape_captivity":
+                            ImprisonmentCheats.EscapeMysteriously();
+                            break;
                         case "dragons":
                             OpenDragonsMenu();
+                            break;
+                        case "battle_skills":
+                            BattleSkills.OpenSkillCastMenu();
                             break;
                         case "combat":
                             OpenCombatMenu();
@@ -148,9 +161,12 @@ namespace RoTCheats.UI
             elements.Add(new InquiryElement("toggle_ammo", string.Format("Toggle Unlimited Ammo [{0}]", settings.UnlimitedAmmo ? "ENABLED" : "DISABLED"), null, true, "Continuously refills all arrows, bolts, and throwing weapons in battle."));
             elements.Add(new InquiryElement("toggle_onehit", string.Format("Toggle One-Hit Kill (Pierces Shields & Guards) [{0}]", settings.OneHitKill ? "ENABLED" : "DISABLED"), null, true, "Inflicts 99,999 lethal damage, breaks enemy shields and crushes through enemy parries and blocks. Never applies to enemies."));
             elements.Add(new InquiryElement("open_speed", string.Format("🏃 Battle Speed Modifiers (P:{0:0.0}x | S:{1:0.0}x | H:{2:0.0}x)", settings.PlayerSpeedMultiplier, settings.SquadSpeedMultiplier, settings.HorseSpeedMultiplier), null, true, "Adjust movement speed for player on foot, squad on foot, and when on horseback/mount."));
+            elements.Add(new InquiryElement("sweeping_force", "💨 Unleash Sweeping Force (Fus-Ro-Dah) [Numpad 1 / U]", null, true, "Blasts forward cone of enemies into the air, killing them instantly."));
+            elements.Add(new InquiryElement("rhllor_light", "🔥 Unleash R'hllor's Light (Area Firestorm) [Numpad 2 / I]", null, true, "Calls down a swirling fire barrage at aimed location, incinerating all enemies."));
+            elements.Add(new InquiryElement("cannibal_wisp", "🐉 Unleash Cannibal's Wisp (Dragon Fire Spray) [Numpad 3 / O]", null, true, "Sprays continuous jet of lethal dragon fire in the aimed direction."));
+            elements.Add(new InquiryElement("deathly_hallows", "💀 Unleash Deathly Hallows (Kill All Enemies) [Numpad 4 / P]", null, true, "Last resort ultimate to instantly eliminate all active enemy soldiers in current battle."));
             elements.Add(new InquiryElement("heal_player", "Heal Player & Dragon Now", null, true, "Instantly sets Health to 100% for you and your mount."));
             elements.Add(new InquiryElement("heal_party", "Heal Party & Revive All Wounded Troops", null, true, "Heals all active units in battle and clears wounded status in campaign party."));
-            elements.Add(new InquiryElement("wound_enemies", "Wound / Defeat All Enemies (Win Battle)", null, true, "Instantly eliminates all active enemy soldiers in the current battle."));
 
             MultiSelectionInquiryData data = new MultiSelectionInquiryData(
                 "God Mode & Combat Cheats",
@@ -195,14 +211,24 @@ namespace RoTCheats.UI
                         case "open_speed":
                             OpenSpeedMenu();
                             break;
+                        case "sweeping_force":
+                            BattleSkills.CastSweepingForce();
+                            break;
+                        case "rhllor_light":
+                            BattleSkills.CastRhllorLight();
+                            break;
+                        case "cannibal_wisp":
+                            BattleSkills.CastCannibalWisp();
+                            break;
+                        case "deathly_hallows":
+                        case "wound_enemies":
+                            BattleSkills.CastDeathlyHallows();
+                            break;
                         case "heal_player":
                             CombatCheats.HealPlayerAndMount();
                             break;
                         case "heal_party":
                             CombatCheats.HealParty();
-                            break;
-                        case "wound_enemies":
-                            CombatCheats.WoundAllEnemies();
                             break;
                     }
                 },
@@ -575,6 +601,7 @@ namespace RoTCheats.UI
         {
             List<InquiryElement> elements = new List<InquiryElement>();
 
+            elements.Add(new InquiryElement("escape_captivity", "✨ Escape Imprisonment Mysteriously", null, true, "Break free from captivity now using shadow magic and emerge safely."));
             elements.Add(new InquiryElement("max_morale", "Set Party Morale to 100 (Max)", null, true, "Sets party morale to 100 so troops never desert."));
             elements.Add(new InquiryElement("upgrade_troops", "Upgrade All Ready Troops Instantly", null, true, "Upgrades all troops currently eligible for promotion."));
             elements.Add(new InquiryElement("add_influence", "Add +10,000 Clan Influence", null, true, "Grants influence to vote on kingdom policies and armies."));
@@ -596,6 +623,9 @@ namespace RoTCheats.UI
 
                     switch (id)
                     {
+                        case "escape_captivity":
+                            ImprisonmentCheats.EscapeMysteriously();
+                            break;
                         case "max_morale":
                             if (MobileParty.MainParty != null)
                             {

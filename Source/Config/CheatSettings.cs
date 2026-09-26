@@ -26,6 +26,39 @@ namespace RoTCheats.Config
         private float _squadSpeedMultiplier = 1.0f;
         private float _horseSpeedMultiplier = 1.0f;
         private bool _unlimitedWeight = true;
+        private bool _enableBattleSkillHotkeys = true;
+        private bool _enableLetterSkillKeys = true;
+        private bool _enableNumpadSkillKeys = true;
+
+        public bool EnableBattleSkillHotkeys
+        {
+            get { return MCMSettings.Instance != null ? MCMSettings.Instance.EnableBattleSkillHotkeys : _enableBattleSkillHotkeys; }
+            set
+            {
+                if (MCMSettings.Instance != null) MCMSettings.Instance.EnableBattleSkillHotkeys = value;
+                _enableBattleSkillHotkeys = value;
+            }
+        }
+
+        public bool EnableLetterSkillKeys
+        {
+            get { return MCMSettings.Instance != null ? MCMSettings.Instance.EnableLetterSkillKeys : _enableLetterSkillKeys; }
+            set
+            {
+                if (MCMSettings.Instance != null) MCMSettings.Instance.EnableLetterSkillKeys = value;
+                _enableLetterSkillKeys = value;
+            }
+        }
+
+        public bool EnableNumpadSkillKeys
+        {
+            get { return MCMSettings.Instance != null ? MCMSettings.Instance.EnableNumpadSkillKeys : _enableNumpadSkillKeys; }
+            set
+            {
+                if (MCMSettings.Instance != null) MCMSettings.Instance.EnableNumpadSkillKeys = value;
+                _enableNumpadSkillKeys = value;
+            }
+        }
 
         public bool GodMode
         {

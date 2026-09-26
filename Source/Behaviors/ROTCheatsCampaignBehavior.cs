@@ -1,4 +1,5 @@
 using System;
+using RoTCheats.Cheats;
 using RoTCheats.UI;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
@@ -79,6 +80,43 @@ namespace RoTCheats.Behaviors
                     false,
                     5
                 );
+
+                // Imprisonment menus: Escape Mysteriously
+                string[] captivityMenus = new string[]
+                {
+                    "prisoner_wait",
+                    "settlement_wait",
+                    "menu_captivity_castle_remain",
+                    "menu_captivity_transfer_to_town",
+                    "taken_prisoner",
+                    "defeated_and_taken_prisoner"
+                };
+
+                foreach (string menuId in captivityMenus)
+                {
+                    try
+                    {
+                        starter.AddGameMenuOption(
+                            menuId,
+                            "rot_cheats_escape_" + menuId,
+                            "{=rot_cheats_escape}✨ Escape mysteriously (RoT Cheats)",
+                            delegate(MenuCallbackArgs args)
+                            {
+                                args.optionLeaveType = GameMenuOption.LeaveType.Escape;
+                                return true;
+                            },
+                            delegate(MenuCallbackArgs args)
+                            {
+                                ImprisonmentCheats.EscapeMysteriously();
+                            },
+                            false,
+                            0
+                        );
+                    }
+                    catch
+                    {
+                    }
+                }
             }
             catch
             {

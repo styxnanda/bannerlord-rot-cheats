@@ -60,28 +60,7 @@ namespace RoTCheats.Cheats
 
         public static void WoundAllEnemies()
         {
-            if (Mission.Current == null || Agent.Main == null)
-            {
-                CheatNotify.Show("[RoT Cheats] Defeat enemies cheat can only be used during battle missions.");
-                return;
-            }
-
-            int count = 0;
-            Blow blow = new Blow(Agent.Main.Index);
-            blow.InflictedDamage = 99999;
-            blow.DamageType = DamageTypes.Blunt;
-
-            foreach (Agent agent in Mission.Current.Agents)
-            {
-                if (agent != null && agent.IsActive() && agent != Agent.Main && agent.IsEnemyOf(Agent.Main))
-                {
-                    blow.GlobalPosition = agent.Position;
-                    agent.Die(blow, Agent.KillInfo.Invalid);
-                    count++;
-                }
-            }
-
-            CheatNotify.Show(string.Format("[RoT Cheats] Defeated {0} enemies!", count));
+            BattleSkills.CastDeathlyHallows();
         }
     }
 }

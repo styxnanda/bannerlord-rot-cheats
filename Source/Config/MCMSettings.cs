@@ -360,6 +360,67 @@ namespace RoTCheats.Config
             }
             set { }
         }
+        [SettingPropertyButton("✨ Escape Imprisonment Mysteriously", Content = "Escape Now", Order = 3, RequireRestart = false, HintText = "Mysteriously slip past guards and vanish from captivity without a trace.")]
+        [SettingPropertyGroup("6. Party & Kingdom")]
+        public Action EscapeImprisonmentButton
+        {
+            get { return delegate { ImprisonmentCheats.EscapeMysteriously(); }; }
+            set { }
+        }
+        #endregion
+
+        #region 7. Battle Skills & Magic
+        [SettingPropertyBool("Enable Battle Skills Hotkeys", Order = 1, RequireRestart = false, HintText = "Allows casting battle skills using keyboard hotkeys during battle missions.")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public bool EnableBattleSkillHotkeys { get; set; }
+
+        [SettingPropertyBool("Enable Numpad Hotkeys (1, 2, 3, 4)", Order = 2, RequireRestart = false, HintText = "Numpad 1: Sweeping Force | Numpad 2: R'hllor's Light | Numpad 3: Cannibal's Wisp | Numpad 4: Deathly Hallows.")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public bool EnableNumpadSkillKeys { get; set; }
+
+        [SettingPropertyBool("Enable Letter Hotkeys (U, I, O, P)", Order = 3, RequireRestart = false, HintText = "For keyboards without Numpad: U: Sweeping Force | I: R'hllor's Light | O: Cannibal's Wisp | P: Deathly Hallows.")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public bool EnableLetterSkillKeys { get; set; }
+
+        [SettingPropertyButton("💨 Unleash Sweeping Force (Fus-Ro-Dah)", Content = "Cast Skill", Order = 4, RequireRestart = false, HintText = "Medium-range frontal shockwave that hurls and kills enemies in front of you. [Hotkey: Numpad 1 or U]")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public Action SweepingForceButton
+        {
+            get { return delegate { BattleSkills.CastSweepingForce(); }; }
+            set { }
+        }
+
+        [SettingPropertyButton("🔥 Unleash R'hllor's Light (Area Firestorm)", Content = "Cast Skill", Order = 5, RequireRestart = false, HintText = "Aimed firestorm barrage across a large circular area, incinerating all enemies inside. [Hotkey: Numpad 2 or I]")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public Action RhllorLightButton
+        {
+            get { return delegate { BattleSkills.CastRhllorLight(); }; }
+            set { }
+        }
+
+        [SettingPropertyButton("🐉 Unleash Cannibal's Wisp (Dragon Flame Spray)", Content = "Cast Skill", Order = 6, RequireRestart = false, HintText = "Sprays an intense stream of dragon fire in the aimed direction, scorching all enemies. [Hotkey: Numpad 3 or O]")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public Action CannibalWispButton
+        {
+            get { return delegate { BattleSkills.CastCannibalWisp(); }; }
+            set { }
+        }
+
+        [SettingPropertyButton("💀 Unleash Deathly Hallows (Kill All Enemies)", Content = "Wipe Enemies", Order = 7, RequireRestart = false, HintText = "Last resort ultimate to instantly eliminate all enemies on the battlefield and win immediately. [Hotkey: Numpad 4 or P]")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public Action DeathlyHallowsButton
+        {
+            get { return delegate { BattleSkills.CastDeathlyHallows(); }; }
+            set { }
+        }
+
+        [SettingPropertyButton("⚡ Open Battle Skills Quick-Cast Menu", Content = "Open Menu", Order = 8, RequireRestart = false, HintText = "Opens the in-game skill selector popup to trigger any battle skill. [Hotkey: K]")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public Action OpenSkillMenuButton
+        {
+            get { return delegate { BattleSkills.OpenSkillCastMenu(); }; }
+            set { }
+        }
         #endregion
 
         public MCMSettings()
@@ -373,6 +434,9 @@ namespace RoTCheats.Config
             SquadSpeedMultiplier = 1.0f;
             HorseSpeedMultiplier = 1.0f;
             UnlimitedWeight = true;
+            EnableBattleSkillHotkeys = true;
+            EnableNumpadSkillKeys = true;
+            EnableLetterSkillKeys = true;
         }
     }
 }

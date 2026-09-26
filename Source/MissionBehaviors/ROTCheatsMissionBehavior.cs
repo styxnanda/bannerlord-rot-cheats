@@ -1,6 +1,8 @@
 using System;
+using RoTCheats.Cheats;
 using RoTCheats.Config;
 using TaleWorlds.Core;
+using TaleWorlds.InputSystem;
 using TaleWorlds.MountAndBlade;
 
 namespace RoTCheats.MissionBehaviors
@@ -11,6 +13,7 @@ namespace RoTCheats.MissionBehaviors
         private float _lastSquadSpeed = -1f;
         private float _lastHorseSpeed = -1f;
         private float _periodicTimer = 0f;
+        private float _skillCooldownTimer = 0f;
 
         public override MissionBehaviorType BehaviorType
         {
@@ -25,6 +28,54 @@ namespace RoTCheats.MissionBehaviors
             if (mainAgent == null || !mainAgent.IsActive()) return;
 
             CheatSettings settings = CheatSettings.Instance;
+
+            // Battle Skills Hotkeys Check
+            if (settings.EnableBattleSkillHotkeys)
+            {
+                _skillCooldownTimer -= dt;
+                if (_skillCooldownTimer <= 0f)
+                {
+                    bool num1 = settings.EnableNumpadSkillKeys && Input.IsKeyPressed(InputKey.Numpad1);
+                    bool letU = settings.EnableLetterSkillKeys && Input.IsKeyPressed(InputKey.U);
+
+                    bool num2 = settings.EnableNumpadSkillKeys && Input.IsKeyPressed(InputKey.Numpad2);
+                    bool letI = settings.EnableLetterSkillKeys && Input.IsKeyPressed(InputKey.I);
+
+                    bool num3 = settings.EnableNumpadSkillKeys && Input.IsKeyPressed(InputKey.Numpad3);
+                    bool letO = settings.EnableLetterSkillKeys && Input.IsKeyPressed(InputKey.O);
+
+                    bool num4 = settings.EnableNumpadSkillKeys && Input.IsKeyPressed(InputKey.Numpad4);
+                    bool letP = settings.EnableLetterSkillKeys && Input.IsKeyPressed(InputKey.P);
+
+                    bool menuK = Input.IsKeyPressed(InputKey.K);
+
+                    if (num1 || letU)
+                    {
+                        _skillCooldownTimer = 0.35f;
+                        BattleSkills.CastSweepingForce();
+                    }
+                    else if (num2 || letI)
+                    {
+                        _skillCooldownTimer = 0.35f;
+                        BattleSkills.CastRhllorLight();
+                    }
+                    else if (num3 || letO)
+                    {
+                        _skillCooldownTimer = 0.35f;
+                        BattleSkills.CastCannibalWisp();
+                    }
+                    else if (num4 || letP)
+                    {
+                        _skillCooldownTimer = 0.35f;
+                        BattleSkills.CastDeathlyHallows();
+                    }
+                    else if (menuK)
+                    {
+                        _skillCooldownTimer = 0.35f;
+                        BattleSkills.OpenSkillCastMenu();
+                    }
+                }
+            }
 
             // God Mode continuous check
             if (settings.GodMode)

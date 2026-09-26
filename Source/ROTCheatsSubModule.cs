@@ -192,6 +192,48 @@ namespace RoTCheats
             CheatSettings.Instance.Save();
             return "Unlimited Weight Limit is now " + (CheatSettings.Instance.UnlimitedWeight ? "ENABLED" : "DISABLED");
         }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("sweeping_force", "rotcheats")]
+        public static string CommandSweepingForce(List<string> strings)
+        {
+            BattleSkills.CastSweepingForce();
+            return "Unleashed Sweeping Force!";
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("rhllor_light", "rotcheats")]
+        public static string CommandRhllorLight(List<string> strings)
+        {
+            BattleSkills.CastRhllorLight();
+            return "Unleashed R'hllor's Light!";
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("cannibal_wisp", "rotcheats")]
+        public static string CommandCannibalWisp(List<string> strings)
+        {
+            BattleSkills.CastCannibalWisp();
+            return "Unleashed Cannibal's Wisp!";
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("deathly_hallows", "rotcheats")]
+        public static string CommandDeathlyHallows(List<string> strings)
+        {
+            BattleSkills.CastDeathlyHallows();
+            return "Unleashed Deathly Hallows!";
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("skills", "rotcheats")]
+        public static string CommandSkillsMenu(List<string> strings)
+        {
+            BattleSkills.OpenSkillCastMenu();
+            return "Battle Skills Quick Cast Menu opened.";
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("escape", "rotcheats")]
+        public static string CommandEscape(List<string> strings)
+        {
+            ImprisonmentCheats.EscapeMysteriously();
+            return "Escaped imprisonment mysteriously!";
+        }
         #endregion
     }
 }
