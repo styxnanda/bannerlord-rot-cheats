@@ -26,6 +26,7 @@ namespace RoTCheats.Config
         private float _squadSpeedMultiplier = 1.0f;
         private float _horseSpeedMultiplier = 1.0f;
         private bool _unlimitedWeight = true;
+        private float _partyBaseSpeedBonus = 0f;
         private bool _enableBattleSkillHotkeys = true;
         private bool _enableLetterSkillKeys = true;
         private bool _enableNumpadSkillKeys = true;
@@ -147,6 +148,16 @@ namespace RoTCheats.Config
             {
                 if (MCMSettings.Instance != null) MCMSettings.Instance.UnlimitedWeight = value;
                 _unlimitedWeight = value;
+            }
+        }
+
+        public float PartyBaseSpeedBonus
+        {
+            get { return MCMSettings.Instance != null ? MCMSettings.Instance.PartyBaseSpeedBonus : _partyBaseSpeedBonus; }
+            set
+            {
+                if (MCMSettings.Instance != null) MCMSettings.Instance.PartyBaseSpeedBonus = value;
+                _partyBaseSpeedBonus = value;
             }
         }
 

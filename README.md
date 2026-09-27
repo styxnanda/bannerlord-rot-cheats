@@ -39,8 +39,9 @@ Open the Bannerlord developer console by pressing `Alt + ~` and use the followin
 |---|---|
 | `rotcheats.menu` | Opens the full interactive cheat inquiry menu |
 | `rotcheats.sweeping_force` | Unleashes Sweeping Force (Fus-Ro-Dah blast) |
-| `rotcheats.rhllor_light` | Unleashes R'hllor's Light (Aimed firestorm barrage) |
-| `rotcheats.cannibal_wisp` | Unleashes Cannibal's Wisp (Aimed dragon fire spray) |
+| `rotcheats.rhllor_light` | Launches R'hllor's Light missile barrage at aimed reticle |
+| `rotcheats.rhllor_item` | Cheats and equips the flaming R'hllor's Light weapon into inventory |
+| `rotcheats.cannibal_wisp` | Toggles Cannibal's Wisp (continuous hand flame spray ON/OFF) |
 | `rotcheats.deathly_hallows` | Unleashes Deathly Hallows (Wipes all enemies to win) |
 | `rotcheats.skills` | Opens the Battle Skills Quick-Cast menu |
 | `rotcheats.escape` | Mysteriously escapes from captivity immediately |
@@ -63,16 +64,18 @@ Open the Bannerlord developer console by pressing `Alt + ~` and use the followin
   - Enemies in front of you (~28m, ~75° cone) are violently knocked off their feet, dismounted, and launched flying backward through the air as corpses with physics ragdoll impulse.
   - In sieges, this blasts enemies straight off ramparts, ladders, and battlements!
   - **Hotkeys**: `Numpad 1` or `U`
-- **🔥 2. R'hllor's Light (Rasenshuriken Firestorm Barrage)**:
-  - Aimed directly through your crosshair or camera view at any ground point, castle wall, battlement, or gatehouse (raycast up to 250m).
-  - Triggers a massive swirling firestorm barrage across a large circular area (~22m radius), summoning roaring fire pillars and spinning explosion trails.
-  - Incinerates all enemies and enemy mounts inside the circular zone into ashes.
-  - **Hotkeys**: `Numpad 2` or `I`
-- **🐉 3. Cannibal's Wisp (Dragon Flame Spray)**:
-  - Channels the fiery wrath of Cannibal, the wild dragon of Dragonstone.
-  - Emits a continuous, concentrated stream of roaring dragon flames in the aimed direction (up to ~36m forward).
-  - Scorches everything in its cone, igniting victims into raging infernos. Perfect for incinerating choke points, breaches, and ladder bottlenecks.
-  - **Hotkeys**: `Numpad 3` or `O`
+- **🔥 2. R'hllor's Light (Flaming Weapon, Radial Aim Reticle & Missile Barrage)**:
+  - Can be cheated into inventory via `rotcheats.rhllor_item`, MCM settings, F10 Cheat Menu, or Quick-Cast menu (`K`).
+  - When wielded in combat, it actively projects a glowing fire radial reticle on the ground or castle walls wherever your camera is aiming.
+  - Upon **Left-Click (Attack)** or pressing **`Numpad 2` / `I`**, launches an arched salvo of ballistic fire missiles streaking through the sky with flame and smoke trails.
+  - Upon impact, detonates into a colossal radial explosion (~16m radius), incinerating all enemy soldiers and mounts caught inside into ashes.
+  - **Hotkeys**: `Left Mouse Button` (while holding weapon), `Numpad 2`, or `I`
+- **🐉 3. Cannibal's Wisp (Continuous Hand Flame Spray - Toggled ON/OFF)**:
+  - Pure hand sorcery—**no dragon required**. Works on foot or mounted on any horse.
+  - Press **`Numpad 3`** or **`O`** to toggle the fire spray **ON** or **OFF**.
+  - While active, locks into an outstretched casting arm animation (`act_ready_thrust_1h` on upper body channel, allowing full freedom to walk, sprint, or ride) while spraying a continuous torrent of roaring flames directly from your right hand bone.
+  - Enemies caught in the forward flame jet suffer continuous lethal damage and burst into flames.
+  - **Hotkeys**: `Numpad 3` or `O` (Toggle ON / OFF)
 - **💀 4. Deathly Hallows (Wipe All Enemies)**:
   - The ultimate last resort power when you are tired or bored of the battle and want an immediate victory.
   - Releases a battlefield-wide pulse of doom that instantly eliminates all active enemy soldiers across the entire map, including siege crews, wall defenders, and reinforcements.

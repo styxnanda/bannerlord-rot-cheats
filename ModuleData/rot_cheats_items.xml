@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Items>
+	<Item
+		id="rot_rhllors_light"
+		name="{=rot_rhllor_name}R'hllor's Light"
+		is_merchandise="false"
+		body_name="bo_sword_one_handed"
+		mesh="torch_g"
+		prefab="torch_a_wm_only_flame"
+		culture="Culture.neutral_culture"
+		value="500000"
+		weight="1.0"
+		Type="OneHandedWeapon"
+		item_holsters="sword_left">
+		<ItemComponent>
+			<Weapon
+				weapon_class="OneHandedSword"
+				weapon_balance="100"
+				thrust_speed="110"
+				speed_rating="110"
+				missile_speed="0"
+				weapon_length="105"
+				swing_damage="250"
+				swing_damage_type="Cut"
+				thrust_damage="200"
+				thrust_damage_type="Pierce"
+				physics_material="metal_weapon">
+				<WeaponFlags
+					MeleeWeapon="true" />
+			</Weapon>
+		</ItemComponent>
+		<Flags
+			Civilian="true" />
+	</Item>
+</Items>

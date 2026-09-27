@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Bannerlord.UIExtenderEx;
 using HarmonyLib;
 using RoTCheats.Behaviors;
 using RoTCheats.Cheats;
@@ -17,26 +18,25 @@ namespace RoTCheats
 {
     public class ROTCheatsSubModule : MBSubModuleBase
     {
+        private UIExtender _uiExtender;
+
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
             try
             {
+                _uiExtender = UIExtender.Create("ROTCheats");
+                _uiExtender.Register(typeof(ROTCheatsSubModule).Assembly);
+                _uiExtender.Enable();
+            }
+            catch
+            {
+            }
+
+            try
+            {
                 Harmony harmony = new Harmony("mod.rot.cheats");
-                foreach (Type type in typeof(ROTCheatsSubModule).Assembly.GetTypes())
-                {
-                    try
-                    {
-                        object[] attrs = type.GetCustomAttributes(typeof(HarmonyPatch), false);
-                        if (attrs != null && attrs.Length > 0)
-                        {
-                            harmony.CreateClassProcessor(type).Patch();
-                        }
-                    }
-                    catch
-                    {
-                    }
-                }
+                harmony.PatchAll(typeof(ROTCheatsSubModule).Assembly);
             }
             catch
             {
@@ -78,6 +78,16 @@ namespace RoTCheats
                 if (f10Pressed || ctrlShiftCPressed)
                 {
                     CheatMenuManager.OpenMainMenu();
+                }
+
+                // Hotkey 3: Ctrl + Shift + N: Navigation Enhancer Menu
+                bool ctrlShiftNPressed = (Input.IsKeyDown(InputKey.LeftControl) || Input.IsKeyDown(InputKey.RightControl)) &&
+                                         (Input.IsKeyDown(InputKey.LeftShift) || Input.IsKeyDown(InputKey.RightShift)) &&
+                                         Input.IsKeyPressed(InputKey.N);
+
+                if (ctrlShiftNPressed)
+                {
+                    NavigationEnhancerManager.OpenNavigationEnhancerMenu();
                 }
             }
             catch
@@ -207,11 +217,18 @@ namespace RoTCheats
             return "Unleashed R'hllor's Light!";
         }
 
+        [CommandLineFunctionality.CommandLineArgumentFunction("rhllor_item", "rotcheats")]
+        public static string CommandRhllorItem(List<string> strings)
+        {
+            ItemCheats.GiveRhllorsLight(true);
+            return "Spawned and equipped R'hllor's Light weapon!";
+        }
+
         [CommandLineFunctionality.CommandLineArgumentFunction("cannibal_wisp", "rotcheats")]
         public static string CommandCannibalWisp(List<string> strings)
         {
             BattleSkills.CastCannibalWisp();
-            return "Unleashed Cannibal's Wisp!";
+            return "Toggled Cannibal's Wisp fire spray (" + (BattleSkills.IsCannibalWispActive ? "ON" : "OFF") + ")!";
         }
 
         [CommandLineFunctionality.CommandLineArgumentFunction("deathly_hallows", "rotcheats")]
@@ -233,6 +250,40 @@ namespace RoTCheats
         {
             ImprisonmentCheats.EscapeMysteriously();
             return "Escaped imprisonment mysteriously!";
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("nav", "rotcheats")]
+        public static string CommandNavMenu(List<string> strings)
+        {
+            NavigationEnhancerManager.OpenNavigationEnhancerMenu();
+            return "Navigation Enhancer menu opened.";
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("partyspeed", "rotcheats")]
+        public static string CommandPartySpeed(List<string> strings)
+        {
+            if (strings != null && strings.Count > 0)
+            {
+                float bonus = 0f;
+                if (float.TryParse(strings[0], out bonus))
+                {
+                    CheatSettings.Instance.PartyBaseSpeedBonus = bonus;
+                    CheatSettings.Instance.Save();
+                    return string.Format("Party base speed bonus set to {0:+0.0;-0.0;0.0}", bonus);
+                }
+            }
+            return string.Format("Current Party base speed bonus: {0:+0.0;-0.0;0.0}. Usage: rotcheats.partyspeed <bonus_number>", CheatSettings.Instance.PartyBaseSpeedBonus);
+        }
+
+        [CommandLineFunctionality.CommandLineArgumentFunction("teleport", "rotcheats")]
+        public static string CommandTeleport(List<string> strings)
+        {
+            if (NavigationEnhancerManager.HasActiveDestination())
+            {
+                NavigationEnhancerManager.TeleportPartyToDestination();
+                return "Party teleported to destination.";
+            }
+            return "No destination set! Left-click a destination on the world map first.";
         }
         #endregion
     }

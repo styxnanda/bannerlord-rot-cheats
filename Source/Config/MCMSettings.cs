@@ -310,6 +310,10 @@ namespace RoTCheats.Config
         #endregion
 
         #region 6. Party & Kingdom
+        [SettingPropertyFloatingInteger("Party Base Speed Bonus", -20.0f, 50.0f, "+#0.0;-#0.0;0.0", Order = 0, RequireRestart = false, HintText = "Direct addition to your party's base movement speed on the campaign map (can be modified by +/- 5 via Navigation Enhancer).")]
+        [SettingPropertyGroup("6. Party & Kingdom")]
+        public float PartyBaseSpeedBonus { get; set; }
+
         [SettingPropertyButton("Set Party Morale to 100 (Max)", Content = "Max Morale", Order = 1, RequireRestart = false, HintText = "Boosts party morale to 100 so troops never desert.")]
         [SettingPropertyGroup("6. Party & Kingdom")]
         public Action MaxMoraleButton
@@ -367,6 +371,14 @@ namespace RoTCheats.Config
             get { return delegate { ImprisonmentCheats.EscapeMysteriously(); }; }
             set { }
         }
+
+        [SettingPropertyButton("🧭 Open Navigation Enhancer Menu", Content = "Open Menu", Order = 4, RequireRestart = false, HintText = "Opens the Navigation Enhancer popup to modify speed by +/-5 or teleport to clicked location.")]
+        [SettingPropertyGroup("6. Party & Kingdom")]
+        public Action OpenNavigationEnhancerButton
+        {
+            get { return delegate { NavigationEnhancerManager.OpenNavigationEnhancerMenu(); }; }
+            set { }
+        }
         #endregion
 
         #region 7. Battle Skills & Magic
@@ -390,23 +402,31 @@ namespace RoTCheats.Config
             set { }
         }
 
-        [SettingPropertyButton("🔥 Unleash R'hllor's Light (Area Firestorm)", Content = "Cast Skill", Order = 5, RequireRestart = false, HintText = "Aimed firestorm barrage across a large circular area, incinerating all enemies inside. [Hotkey: Numpad 2 or I]")]
+        [SettingPropertyButton("🔥 Launch R'hllor's Light Missiles (Radial Explosion)", Content = "Launch Missiles", Order = 5, RequireRestart = false, HintText = "Launches fire missiles and detonates a cataclysmic explosion at the aimed radial area. [Hotkey: Numpad 2 or I]")]
         [SettingPropertyGroup("7. Battle Skills & Magic")]
         public Action RhllorLightButton
         {
-            get { return delegate { BattleSkills.CastRhllorLight(); }; }
+            get { return delegate { BattleSkills.LaunchRhllorMissiles(); }; }
             set { }
         }
 
-        [SettingPropertyButton("🐉 Unleash Cannibal's Wisp (Dragon Flame Spray)", Content = "Cast Skill", Order = 6, RequireRestart = false, HintText = "Sprays an intense stream of dragon fire in the aimed direction, scorching all enemies. [Hotkey: Numpad 3 or O]")]
+        [SettingPropertyButton("⚔️ Spawn & Equip R'hllor's Light Item", Content = "Spawn Weapon", Order = 6, RequireRestart = false, HintText = "Cheats the flaming R'hllor's Light sword into your inventory and equips it. Wielding it shows a radial aim reticle on the ground!")]
+        [SettingPropertyGroup("7. Battle Skills & Magic")]
+        public Action SpawnRhllorItemButton
+        {
+            get { return delegate { ItemCheats.GiveRhllorsLight(true); }; }
+            set { }
+        }
+
+        [SettingPropertyButton("🐉 Toggle Cannibal's Wisp (Hand Fire Spray)", Content = "Toggle Fire Spray", Order = 7, RequireRestart = false, HintText = "Toggles continuous spray of fire streaming directly from the player's hand with outstretched casting animation. [Hotkey: Numpad 3 or O]")]
         [SettingPropertyGroup("7. Battle Skills & Magic")]
         public Action CannibalWispButton
         {
-            get { return delegate { BattleSkills.CastCannibalWisp(); }; }
+            get { return delegate { BattleSkills.ToggleCannibalWisp(); }; }
             set { }
         }
 
-        [SettingPropertyButton("💀 Unleash Deathly Hallows (Kill All Enemies)", Content = "Wipe Enemies", Order = 7, RequireRestart = false, HintText = "Last resort ultimate to instantly eliminate all enemies on the battlefield and win immediately. [Hotkey: Numpad 4 or P]")]
+        [SettingPropertyButton("💀 Unleash Deathly Hallows (Kill All Enemies)", Content = "Wipe Enemies", Order = 8, RequireRestart = false, HintText = "Last resort ultimate to instantly eliminate all enemies on the battlefield and win immediately. [Hotkey: Numpad 4 or P]")]
         [SettingPropertyGroup("7. Battle Skills & Magic")]
         public Action DeathlyHallowsButton
         {
@@ -434,6 +454,7 @@ namespace RoTCheats.Config
             SquadSpeedMultiplier = 1.0f;
             HorseSpeedMultiplier = 1.0f;
             UnlimitedWeight = true;
+            PartyBaseSpeedBonus = 0f;
             EnableBattleSkillHotkeys = true;
             EnableNumpadSkillKeys = true;
             EnableLetterSkillKeys = true;

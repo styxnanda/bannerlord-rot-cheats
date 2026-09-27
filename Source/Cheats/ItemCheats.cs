@@ -17,6 +17,7 @@ namespace RoTCheats.Cheats
     {
         public static readonly string[] RoTLegendaryWeapons = new string[]
         {
+            "rot_rhllors_light",
             "longclaw_sword",
             "ice_sword",
             "oathkeeper_sword",
@@ -238,6 +239,39 @@ namespace RoTCheats.Cheats
             }
 
             CheatNotify.Show(string.Format("[RoT Cheats] Unlocked all {0} weapon crafting pieces and templates!", unlockedCount));
+        }
+
+        public const string RhllorLightId = "rot_rhllors_light";
+
+        public static ItemObject FindRhllorItem()
+        {
+            if (Game.Current == null || Game.Current.ObjectManager == null) return null;
+            return Game.Current.ObjectManager.GetObject<ItemObject>(RhllorLightId)
+                ?? Game.Current.ObjectManager.GetObject<ItemObject>("lightbringer");
+        }
+
+        public static bool GiveRhllorsLight(bool autoEquip = true)
+        {
+            if (MobileParty.MainParty == null || Hero.MainHero == null) return false;
+
+            ItemObject item = FindRhllorItem();
+            if (item == null)
+            {
+                CheatNotify.Show("[RoT Cheats] R'hllor's Light item not found in game objects.");
+                return false;
+            }
+
+            MobileParty.MainParty.ItemRoster.AddToCounts(item, 1);
+
+            if (autoEquip)
+            {
+                Hero.MainHero.BattleEquipment[EquipmentIndex.WeaponItemBeginSlot] = new EquipmentElement(item);
+            }
+
+            string itemName = item.Name != null ? item.Name.ToString() : "R'hllor's Light";
+            CheatNotify.Show(string.Format("[RoT Cheats] {0} added to party inventory{1}!",
+                itemName, autoEquip ? " and equipped as primary weapon" : ""));
+            return true;
         }
     }
 }

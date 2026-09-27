@@ -29,6 +29,10 @@ namespace RoTCheats.MissionBehaviors
 
             CheatSettings settings = CheatSettings.Instance;
 
+            // Continuous Battle Skills Ticking (R'hllor's Light radial reticle/missiles & Cannibal's Wisp hand spray)
+            BattleSkills.TickRhllorsLight(dt);
+            BattleSkills.TickCannibalWisp(dt);
+
             // Battle Skills Hotkeys Check
             if (settings.EnableBattleSkillHotkeys)
             {
@@ -57,12 +61,12 @@ namespace RoTCheats.MissionBehaviors
                     else if (num2 || letI)
                     {
                         _skillCooldownTimer = 0.35f;
-                        BattleSkills.CastRhllorLight();
+                        BattleSkills.LaunchRhllorMissiles();
                     }
                     else if (num3 || letO)
                     {
                         _skillCooldownTimer = 0.35f;
-                        BattleSkills.CastCannibalWisp();
+                        BattleSkills.ToggleCannibalWisp();
                     }
                     else if (num4 || letP)
                     {
@@ -171,6 +175,12 @@ namespace RoTCheats.MissionBehaviors
                     }
                 }
             }
+        }
+
+        protected override void OnEndMission()
+        {
+            base.OnEndMission();
+            BattleSkills.ResetState();
         }
     }
 }

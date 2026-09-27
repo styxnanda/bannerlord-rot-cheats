@@ -7,6 +7,7 @@
   <MultiplayerModule value="false"/>
   <DependedModules>
     <DependedModule Id="Bannerlord.Harmony" Optional="false"/>
+    <DependedModule Id="Bannerlord.UIExtenderEx" Optional="false"/>
     <DependedModule Id="Bannerlord.MBOptionScreen" Optional="true"/>
     <DependedModule Id="Native" Optional="false"/>
     <DependedModule Id="SandBoxCore" Optional="false"/>
@@ -29,4 +30,15 @@
       </Tags>
     </SubModule>
   </SubModules>
+  <Xmls>
+    <XmlNode>
+      <XmlName id="Items" path="rot_cheats_items"/>
+      <IncludedGameTypes>
+        <GameType value="Campaign"/>
+        <GameType value="CampaignStoryMode"/>
+        <GameType value="CustomGame"/>
+        <GameType value="EditorGame"/>
+      </IncludedGameTypes>
+    </XmlNode>
+  </Xmls>
 </Module>

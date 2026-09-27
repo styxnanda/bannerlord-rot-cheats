@@ -27,10 +27,17 @@ if (-not (Test-Path $mcmDll)) {
 $rotDll = Join-Path $gameDir "Modules\ROT-Core\bin\Win64_Shipping_Client\ROT.dll"
 $netstandard = Join-Path $binDir "mono\lib\mono\4.5\Facades\netstandard.dll"
 
+$uieDll = Join-Path $gameDir "Modules\Bannerlord.UIExtenderEx\bin\Win64_Shipping_Client\Bannerlord.UIExtenderEx.dll"
+$sbViewDll = Join-Path $gameDir "Modules\SandBox\bin\Win64_Shipping_Client\SandBox.View.dll"
+$sbDll = Join-Path $gameDir "Modules\SandBox\bin\Win64_Shipping_Client\SandBox.dll"
+
+$nativeBin = Join-Path $gameDir "Modules\Native\bin\Win64_Shipping_Client"
+
 $references = @(
     "/r:`"$netstandard`"",
     "/r:`"$binDir\TaleWorlds.Core.dll`"",
     "/r:`"$binDir\TaleWorlds.MountAndBlade.dll`"",
+    "/r:`"$nativeBin\TaleWorlds.MountAndBlade.View.dll`"",
     "/r:`"$binDir\TaleWorlds.Library.dll`"",
     "/r:`"$binDir\TaleWorlds.CampaignSystem.dll`"",
     "/r:`"$binDir\TaleWorlds.DotNet.dll`"",
@@ -39,12 +46,19 @@ $references = @(
     "/r:`"$binDir\TaleWorlds.SaveSystem.dll`"",
     "/r:`"$binDir\TaleWorlds.InputSystem.dll`"",
     "/r:`"$binDir\TaleWorlds.Localization.dll`"",
+    "/r:`"$binDir\TaleWorlds.CampaignSystem.ViewModelCollection.dll`"",
+    "/r:`"$binDir\TaleWorlds.Core.ViewModelCollection.dll`"",
+    "/r:`"$binDir\TaleWorlds.ScreenSystem.dll`"",
     "/r:`"$harmonyDll`"",
     "/r:`"$mcmDll`"",
     "/r:`"$rotDll`"",
+    "/r:`"$uieDll`"",
+    "/r:`"$sbViewDll`"",
+    "/r:`"$sbDll`"",
     "/r:`"$binDir\System.Numerics.Vectors.dll`"",
     "/r:System.dll",
-    "/r:System.Core.dll"
+    "/r:System.Core.dll",
+    "/r:System.Xml.dll"
 )
 
 $sourceFiles = Get-ChildItem -Path $sourceDir -Filter "*.cs" -Recurse | Select-Object -ExpandProperty FullName
@@ -75,6 +89,11 @@ if (-not (Test-Path "$modulesDir\bin\Win64_Shipping_Client")) {
 
 Copy-Item -Path $targetDll -Destination "$modulesDir\bin\Win64_Shipping_Client\ROTCheats.dll" -Force
 Copy-Item -Path (Join-Path $projectDir "SubModule.xml") -Destination "$modulesDir\SubModule.xml" -Force
+
+$moduleDataSrc = Join-Path $projectDir "ModuleData"
+if (Test-Path $moduleDataSrc) {
+    Copy-Item -Path $moduleDataSrc -Destination "$modulesDir\ModuleData" -Recurse -Force
+}
 
 Write-Host "[DEPLOYED] Module files deployed to $modulesDir." -ForegroundColor Green
 Write-Host "================================================" -ForegroundColor Cyan

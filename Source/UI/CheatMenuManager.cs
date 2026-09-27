@@ -36,6 +36,7 @@ namespace RoTCheats.UI
             elements.Add(new InquiryElement("stamina", "⚒️ Unlimited Stamina & Crafting", null, true, string.Format("Infinite Smithing Stamina: {0} | Unlock all crafting pieces.", settings.InfiniteStamina ? "ON" : "OFF")));
             elements.Add(new InquiryElement("skills", "⭐ Modify Skills, Levels & XP", null, true, "Set skills to 300+, add focus/attribute points, and level up Main Hero or Companions."));
             elements.Add(new InquiryElement("party", "👑 Party & Kingdom Cheats", null, true, "Max party morale, instant troop upgrades, renown, influence, and mysterious escape."));
+            elements.Add(new InquiryElement("navigation", "🧭 Navigation Enhancer", null, true, string.Format("Base Speed Bonus: {0:+0.0;-0.0;0.0} | Teleport to clicked destination & locate/execute heroes.", settings.PartyBaseSpeedBonus)));
 
             MultiSelectionInquiryData data = new MultiSelectionInquiryData(
                 "Realm of Thrones Cheats (v7.1)",
@@ -78,6 +79,9 @@ namespace RoTCheats.UI
                             break;
                         case "party":
                             OpenPartyMenu();
+                            break;
+                        case "navigation":
+                            NavigationEnhancerManager.OpenNavigationEnhancerMenu();
                             break;
                     }
                 },
@@ -163,7 +167,8 @@ namespace RoTCheats.UI
             elements.Add(new InquiryElement("open_speed", string.Format("🏃 Battle Speed Modifiers (P:{0:0.0}x | S:{1:0.0}x | H:{2:0.0}x)", settings.PlayerSpeedMultiplier, settings.SquadSpeedMultiplier, settings.HorseSpeedMultiplier), null, true, "Adjust movement speed for player on foot, squad on foot, and when on horseback/mount."));
             elements.Add(new InquiryElement("sweeping_force", "💨 Unleash Sweeping Force (Fus-Ro-Dah) [Numpad 1 / U]", null, true, "Blasts forward cone of enemies into the air, killing them instantly."));
             elements.Add(new InquiryElement("rhllor_light", "🔥 Unleash R'hllor's Light (Area Firestorm) [Numpad 2 / I]", null, true, "Calls down a swirling fire barrage at aimed location, incinerating all enemies."));
-            elements.Add(new InquiryElement("cannibal_wisp", "🐉 Unleash Cannibal's Wisp (Dragon Fire Spray) [Numpad 3 / O]", null, true, "Sprays continuous jet of lethal dragon fire in the aimed direction."));
+            elements.Add(new InquiryElement("rhllor_item", "⚔️ Cheat & Equip R'hllor's Light Weapon", null, true, "Adds R'hllor's Light flaming sword to your inventory and equips it immediately."));
+            elements.Add(new InquiryElement("cannibal_wisp", string.Format("🐉 Cannibal's Wisp (Toggle Hand Fire Spray [{0}]) [Numpad 3 / O]", BattleSkills.IsCannibalWispActive ? "ON" : "OFF"), null, true, "Sprays continuous jet of lethal fire directly from your hand with outstretched casting animation."));
             elements.Add(new InquiryElement("deathly_hallows", "💀 Unleash Deathly Hallows (Kill All Enemies) [Numpad 4 / P]", null, true, "Last resort ultimate to instantly eliminate all active enemy soldiers in current battle."));
             elements.Add(new InquiryElement("heal_player", "Heal Player & Dragon Now", null, true, "Instantly sets Health to 100% for you and your mount."));
             elements.Add(new InquiryElement("heal_party", "Heal Party & Revive All Wounded Troops", null, true, "Heals all active units in battle and clears wounded status in campaign party."));
@@ -216,6 +221,9 @@ namespace RoTCheats.UI
                             break;
                         case "rhllor_light":
                             BattleSkills.CastRhllorLight();
+                            break;
+                        case "rhllor_item":
+                            ItemCheats.GiveRhllorsLight(true);
                             break;
                         case "cannibal_wisp":
                             BattleSkills.CastCannibalWisp();
@@ -369,6 +377,7 @@ namespace RoTCheats.UI
             elements.Add(new InquiryElement("rot_armors", "🛡️ Give All RoT Valyrian & Targaryen Armor Sets", null, true, "Adds Blackfyre plate, Rhaegar plate, Valyrian soldier armor, helmets, and shields."));
             elements.Add(new InquiryElement("smithing_mats", "⚒️ Give 999x of All Smithing Materials", null, true, "Adds 999x Tamaskene steel, fine steel, steel, iron, wrought iron, crude iron, hardwood, and charcoal."));
             elements.Add(new InquiryElement("food", "🍞 Give 100x of All Food Provisions", null, true, "Adds 100x grain, meat, fish, cheese, butter, grapes, olives, beer, wine, and dates."));
+            elements.Add(new InquiryElement("rhllor_item", "🔥 Give & Equip R'hllor's Light (Flaming Sword)", null, true, "Adds the mythical R'hllor's Light flaming sword to your inventory and equips it. Shows radial aim reticle and fires missile barrages."));
             elements.Add(new InquiryElement("wealth", "💰 Give 1,000,000 Gold, 10,000 Renown, 10,000 Influence", null, true, "Boosts personal gold and clan renown & influence."));
 
             MultiSelectionInquiryData data = new MultiSelectionInquiryData(
@@ -407,6 +416,9 @@ namespace RoTCheats.UI
                             break;
                         case "food":
                             ItemCheats.GiveFoodProvisions(100);
+                            break;
+                        case "rhllor_item":
+                            ItemCheats.GiveRhllorsLight(true);
                             break;
                         case "wealth":
                             ItemCheats.GiveWealthAndStats(1000000, 10000f, 10000f);
@@ -606,6 +618,7 @@ namespace RoTCheats.UI
             elements.Add(new InquiryElement("upgrade_troops", "Upgrade All Ready Troops Instantly", null, true, "Upgrades all troops currently eligible for promotion."));
             elements.Add(new InquiryElement("add_influence", "Add +10,000 Clan Influence", null, true, "Grants influence to vote on kingdom policies and armies."));
             elements.Add(new InquiryElement("add_renown", "Add +10,000 Clan Renown", null, true, "Increases Clan Tier and party size limits."));
+            elements.Add(new InquiryElement("navigation", "🧭 Navigation Enhancer (Party Speed & Teleport)", null, true, "Modify party base speed bonus (+/- 5) and teleport to map destination."));
 
             MultiSelectionInquiryData data = new MultiSelectionInquiryData(
                 "Party & Kingdom Cheats",
@@ -668,6 +681,9 @@ namespace RoTCheats.UI
                                 Clan.PlayerClan.AddRenown(10000f, true);
                                 CheatNotify.Show("[RoT Cheats] Granted +10,000 Clan Renown!");
                             }
+                            break;
+                        case "navigation":
+                            NavigationEnhancerManager.OpenNavigationEnhancerMenu();
                             break;
                     }
                 },
